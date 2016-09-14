@@ -137,10 +137,6 @@ class Robot:
             The radius the robot should turn in mm. This can range from
             -2000 to 2000 mm.
         """
-        # Ensures the drive command is available.
-        if self.state != State.SAFE and self.state != State.FULL:
-            print "Drive Command Unavailable"   # Look into error checking and raise error
-            return
 
         # Bounds the velocity and radius to the robot's specified range
         bound_vel = self._convert_bound(velocity, Drive.MIN_VEL, Drive.MAX_VEL)
