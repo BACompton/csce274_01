@@ -29,7 +29,7 @@ class SerialConn:
         :param timeout:
             The read timeout in seconds
         """
-        if port != None:
+        if port is None:
             self.connect(port, buad, timeout)
 
     def __exit__(self, exc_type, exc_val, exc_tb):

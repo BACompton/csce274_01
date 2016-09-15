@@ -24,6 +24,7 @@ class DriveControl(threading.Thread):
 
     def __init__(self, thread_id, name, counter, robot):
         threading.Thread.__init__(self)
+        self.setDaemon(True)
         self.thread_id = thread_id
         self.name = name
         self.counter = counter
@@ -36,22 +37,18 @@ class DriveControl(threading.Thread):
         vel = 50                # Robot's velocity in mm/s.
         turn_time = 3.20        # The time it take to turn 90 degrees in seconds.
 
-        # The amount each interval should wait before
-        # checking for the stop condition again. In seconds.
-        wait_interval = 0.015
-
         while not self._stop and turns >= 0:
             # Drive forward
             self._robot.drive(vel, robot_inf.Drive.STRAIGHT)
             # Time to run the command
-            if self._wait(abs(side_len/vel), wait_interval):
+            if self._wait(abs(side_len/vel), robot_inf.SENSOR_UPDATE_WAIT):
                 break
 
             # Turn 90 degrees
             self._robot.drive(vel, robot_inf.Drive.TURN_CW)
             # Time it takes to turn
-            if self._wait(turn_time, wait_interval):
-                break   # could also be 'continue'
+            if self._wait(turn_time, robot_inf.SENSOR_UPDATE_WAIT):
+                break
             turns -= 1
 
         # Stops robot
@@ -140,7 +137,7 @@ def robot_controller():
             release = True
 
         # Clocks while loop to the update rate of the iRobot Create 2.
-        time.sleep(.015)
+        time.sleep(robot_inf.SENSOR_UPDATE_WAIT)
     print "Stopping Listening"
 
 if __name__ == '__main__':

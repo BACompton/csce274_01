@@ -8,6 +8,8 @@ import serial_inf
 #                   Constants for iRobot Create 2
 # =============================================================================
 
+SENSOR_UPDATE_WAIT = .015   # Time in between sensor updates
+
 _BAUD_RATE = 115200     # iRobot Create 2 Default baud rate
 _TIMEOUT = 1            # The default read timeout to avoid indefinite blocking
 _SENSORS_OPCODE = "142" # Opcode for the sensors command
