@@ -10,6 +10,7 @@ import robot_inf
 #                       Main program for project 1
 # =============================================================================
 
+
 class DriveControl(threading.Thread):
     """
         This performs the action sequence. In this case, it will move in a
@@ -22,12 +23,9 @@ class DriveControl(threading.Thread):
     _robot = None
     _stop = None
 
-    def __init__(self, thread_id, name, counter, robot):
+    def __init__(self, robot):
         threading.Thread.__init__(self)
         self.setDaemon(True)
-        self.thread_id = thread_id
-        self.name = name
-        self.counter = counter
         self._stop = False
         self._robot = robot
 
@@ -35,7 +33,7 @@ class DriveControl(threading.Thread):
         turns = 3               # The number of turns left to make.
         side_len = 250          # The length of the square in mm.
         vel = 50                # Robot's velocity in mm/s.
-        turn_time = 3.20        # The time it take to turn 90 degrees in seconds.
+        turn_time = 3.20        # The time it take to turn 90 degrees in seconds
 
         while not self._stop and turns >= 0:
             # Drive forward
@@ -52,7 +50,7 @@ class DriveControl(threading.Thread):
             turns -= 1
 
         # Stops robot
-        self._robot.drive(0,0)
+        self._robot.drive(0, 0)
 
     def stop(self):
         """
@@ -126,7 +124,7 @@ def robot_controller():
             # Start Square
             release = False
             if act_control is None:
-                act_control = DriveControl(3, "Drive-Controls-Square", 1, robot)
+                act_control = DriveControl(robot)
                 act_control.start()
 
             # Stop Driving
