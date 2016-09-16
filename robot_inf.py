@@ -202,8 +202,11 @@ class Robot:
         data = self._read_packet(Button.PACKET_ID, Button.DATA_BYTES)
 
         # Gets first byte
-        byte = struct.unpack("B", data)[0]
-        return bool(byte & button)
+        if len(data) == Button.DATA_BYTES:
+            byte = struct.unpack("B", data)[0]
+            return bool(byte & button)
+        else:
+            return False
 
     def read_buttons(self):
         """ Reads all the buttons on the iRobot Create 2. This method
@@ -218,17 +221,29 @@ class Robot:
         data = self._read_packet(Button.PACKET_ID, Button.DATA_BYTES)
 
         # Gets first byte
-        byte = struct.unpack("B", data)[0]
-        return {
-            Button.CLEAN: bool(byte & Button.CLEAN),
-            Button.SPOT: bool(byte & Button.SPOT),
-            Button.DOCK: bool(byte & Button.DOCK),
-            Button.MINUTE: bool(byte & Button.MINUTE),
-            Button.HOUR: bool(byte & Button.HOUR),
-            Button.DAY: bool(byte & Button.DAY),
-            Button.SCHEDULE: bool(byte & Button.SCHEDULE),
-            Button.CLOCK: bool(byte & Button.CLOCK)
-        }
+        if len(data) == Button.DATA_BYTES:
+            byte = struct.unpack("B", data)[0]
+            return {
+                Button.CLEAN: bool(byte & Button.CLEAN),
+                Button.SPOT: bool(byte & Button.SPOT),
+                Button.DOCK: bool(byte & Button.DOCK),
+                Button.MINUTE: bool(byte & Button.MINUTE),
+                Button.HOUR: bool(byte & Button.HOUR),
+                Button.DAY: bool(byte & Button.DAY),
+                Button.SCHEDULE: bool(byte & Button.SCHEDULE),
+                Button.CLOCK: bool(byte & Button.CLOCK)
+            }
+        else:
+            return  {
+                Button.CLEAN: False,
+                Button.SPOT: False,
+                Button.DOCK: False,
+                Button.MINUTE: False,
+                Button.HOUR: False,
+                Button.DAY: False,
+                Button.SCHEDULE: False,
+                Button.CLOCK: False
+            }
 
     def _read_packet(self, packet_id, data_bytes):
         """ Sends the sensor command with the provided packet id to the robot
