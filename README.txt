@@ -17,11 +17,11 @@ Group 3: Boyd Compton, Timothy Senn, & Jose Tadeo
         Square.py is the main program for project 1. This program was designed
         with the iRobot Create 2 in mind. The program will begin by initializing
         the robot's state to PASSIVE mode and then SAFE mode. After this point, 
-        the robot will now respond to the clean/power button being pressed.
+        the robot will respond to the clean/power button being pressed.
         
-        When the clean/power button is press and the robot is stopped, it will
+        When the clean/power button is pressed and the robot is stopped, it will
         begin to move clockwise along a square with 250 mm sides by spawning
-        an daemon to control the actuators. This daemon will track the robot's 
+        a daemon to control the actuators. This daemon will track the robot's 
         progress by keeping track of the number of turns left to make. It will
         also calculate the time in between actuator commands by using dead
         reckoning. Alternatively, if the robot is moving when the button is 
@@ -56,7 +56,7 @@ Group 3: Boyd Compton, Timothy Senn, & Jose Tadeo
         - serial_inf.py
         
         PySerial will need to be installed on the system while serial_inf.py 
-        just need to be placed in the same directory as robot_inf.py.
+        just needs to be placed in the same directory as robot_inf.py.
        
     Description:
         Robot_inf.py is an interface tailored specifically to the iRobot 
@@ -68,7 +68,7 @@ Group 3: Boyd Compton, Timothy Senn, & Jose Tadeo
             - Buttons (Ex: CLEAN, DOCK)
             - Special radii for the drive command (Ex: STRAIGHT, TURN_CW)
         
-        On top of these constants, the interfaces contains method that will:
+        On top of these constants, the interfaces contains methods that will:
             - Drive the robot using velocity and radius
             - Read individual button's or all buttons' values
             - Change the robot's state
@@ -79,7 +79,7 @@ Group 3: Boyd Compton, Timothy Senn, & Jose Tadeo
             
             robot_inf.<constant>
         
-        For example, the clean button would be reference like so:
+        For example, the clean button would be referenced like so:
         
             robot_inf.Button.CLEAN
         
@@ -131,7 +131,7 @@ Group 3: Boyd Compton, Timothy Senn, & Jose Tadeo
         interface will:
             - Establish a serial connection
             - Close a serial connection
-            - Send space delimited commands as encoded ASCII command
+            - Send space delimited command as encoded ASCII command
             - Read raw data
             - List available serial ports
         
