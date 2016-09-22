@@ -123,7 +123,7 @@ def robot_controller():
 
             # Start Square
             release = False
-            if act_control is None:
+            if act_control is None or not act_control.isAlive():
                 act_control = DriveControl(robot)
                 act_control.start()
 
